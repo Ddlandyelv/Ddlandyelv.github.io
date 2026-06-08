@@ -1,559 +1,512 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>郑书豪 | 个人主页</title>
-    <style>
-        :root {
-            --bg: #f8f9fa;
-            --card: #ffffff;
-            --text: #2d3436;
-            --text-light: #636e72;
-            --accent: #6c5ce7;
-            --accent-light: #a29bfe;
-            --border: #e9ecef;
-            --shadow: 0 4px 24px rgba(0,0,0,0.06);
-            --radius: 16px;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>郑书豪</title>
+<style>
+:root {
+  --bg: #faf9f7;
+  --surface: #ffffff;
+  --text: #1c1917;
+  --text-muted: #78716c;
+  --text-faint: #a8a29e;
+  --border: #e7e5e4;
+  --accent: #d97706;
+  --accent-subtle: #fffbeb;
+  --accent-border: #fcd34d;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font-serif: "Iowan Old Style", "Noto Serif SC", "Source Han Serif SC", "Songti SC", Georgia, serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", monospace;
+}
 
-        /* Hero */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 50%, #fd79a8 100%);
-            color: #fff;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero-bg-shapes {
-            position: absolute;
-            inset: 0;
-            overflow: hidden;
-            pointer-events: none;
-        }
-        .hero-bg-shapes span {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.08);
-            animation: float 20s infinite;
-        }
-        .hero-bg-shapes span:nth-child(1) { width: 300px; height: 300px; top: -100px; left: -100px; animation-delay: 0s; }
-        .hero-bg-shapes span:nth-child(2) { width: 200px; height: 200px; bottom: -50px; right: -50px; animation-delay: -5s; }
-        .hero-bg-shapes span:nth-child(3) { width: 150px; height: 150px; top: 50%; left: 80%; animation-delay: -10s; }
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(180deg); }
-        }
-        .hero-content { position: relative; z-index: 1; max-width: 720px; }
-        .hero h1 {
-            font-size: clamp(2.8rem, 8vw, 4.5rem);
-            font-weight: 800;
-            letter-spacing: 6px;
-            margin-bottom: 0.5rem;
-        }
-        .hero .subtitle {
-            font-size: clamp(1rem, 2.5vw, 1.25rem);
-            opacity: 0.9;
-            margin-bottom: 0.5rem;
-            letter-spacing: 2px;
-        }
-        .hero .tagline {
-            font-size: 1rem;
-            opacity: 0.75;
-            margin-bottom: 2rem;
-        }
-        .hero-contact {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            font-size: 0.95rem;
-            opacity: 0.9;
-        }
-        .hero-contact a {
-            color: #fff;
-            text-decoration: none;
-            padding: 0.4rem 1rem;
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 20px;
-            transition: all 0.3s;
-        }
-        .hero-contact a:hover {
-            background: rgba(255,255,255,0.15);
-            border-color: rgba(255,255,255,0.6);
-        }
-        .scroll-down {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-            color: rgba(255,255,255,0.6);
-            cursor: pointer;
-        }
-        @keyframes bounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(10px); }
-        }
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1c1917;
+    --surface: #292524;
+    --text: #fafaf9;
+    --text-muted: #a8a29e;
+    --text-faint: #78716c;
+    --border: #44403c;
+    --accent: #fbbf24;
+    --accent-subtle: #292524;
+    --accent-border: #92400e;
+  }
+}
 
-        /* Navigation */
-        nav {
-            position: sticky;
-            top: 0;
-            background: rgba(255,255,255,0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
-            z-index: 100;
-            padding: 0 1rem;
-        }
-        nav ul {
-            display: flex;
-            justify-content: center;
-            gap: 0.25rem;
-            max-width: 800px;
-            margin: 0 auto;
-            list-style: none;
-            overflow-x: auto;
-        }
-        nav a {
-            display: block;
-            padding: 0.8rem 1.2rem;
-            color: var(--text-light);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: color 0.3s;
-            white-space: nowrap;
-        }
-        nav a:hover { color: var(--accent); }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* Sections */
-        .section {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 4rem 1.5rem;
-        }
-        .section-title {
-            font-size: 1.6rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            position: relative;
-            display: inline-block;
-        }
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent), var(--accent-light));
-            border-radius: 2px;
-        }
+html { scroll-behavior: smooth; }
 
-        /* Cards */
-        .card {
-            background: var(--card);
-            border-radius: var(--radius);
-            padding: 1.5rem 2rem;
-            margin-bottom: 1.25rem;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 30px rgba(0,0,0,0.08);
-        }
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
-            margin-bottom: 0.5rem;
-        }
-        .card-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--accent);
-        }
-        .card-subtitle {
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-        .card-meta {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        .card ul {
-            margin-top: 0.5rem;
-            padding-left: 1.2rem;
-        }
-        .card li {
-            font-size: 0.95rem;
-            margin-bottom: 0.3rem;
-            color: var(--text-light);
-        }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  font-size: 16px;
+}
 
-        /* Strength cards */
-        .strength-grid {
-            display: grid;
-            gap: 1.25rem;
-        }
-        .strength-card {
-            background: var(--card);
-            border-radius: var(--radius);
-            padding: 1.5rem 2rem;
-            box-shadow: var(--shadow);
-            border-left: 4px solid var(--accent);
-            transition: transform 0.3s;
-        }
-        .strength-card:hover { transform: translateX(4px); }
-        .strength-card h3 {
-            font-size: 1.05rem;
-            margin-bottom: 0.5rem;
-            color: var(--accent);
-        }
-        .strength-card p {
-            font-size: 0.95rem;
-            color: var(--text-light);
-            line-height: 1.7;
-        }
+/* ── Typography ─────────────────────── */
+h1, h2, h3 { font-weight: 650; letter-spacing: -0.02em; }
+h1 { font-size: clamp(2.5rem, 6vw, 3.8rem); line-height: 1.1; }
+h2 { font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 1.5rem; }
+h3 { font-size: 1.05rem; margin-bottom: 0.3rem; }
+p { color: var(--text-muted); }
 
-        /* Skills */
-        .skills-wrap {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-        }
-        .skill-tag {
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            color: #fff;
-            padding: 0.35rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-        .skill-tag.outline {
-            background: transparent;
-            border: 1px solid var(--accent);
-            color: var(--accent);
-        }
-        .skill-group {
-            margin-bottom: 1.25rem;
-        }
-        .skill-group-label {
-            font-weight: 600;
-            font-size: 0.95rem;
-            margin-bottom: 0.5rem;
-            color: var(--text);
-        }
+a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+a:hover { opacity: 0.7; }
 
-        /* About / 自我介绍 */
-        .about-text {
-            font-size: 1rem;
-            color: var(--text-light);
-            line-height: 1.8;
-        }
-        .about-text p { margin-bottom: 0.8rem; }
+/* ── Header ─────────────────────────── */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: var(--bg);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s, backdrop-filter 0.3s;
+}
+header.scrolled {
+  border-color: var(--border);
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-name {
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+.header-nav { display: flex; gap: 1.5rem; list-style: none; }
+.header-nav a {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.header-nav a:hover { color: var(--accent); opacity: 1; }
 
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-light);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--border);
-        }
+/* ── Hero ───────────────────────────── */
+.hero {
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 6rem 1.5rem 4rem;
+}
+.hero-content { max-width: 680px; }
+.hero-eyebrow {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+.hero h1 { margin-bottom: 0.25rem; }
+.hero .subtitle {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  font-style: italic;
+  line-height: 1.5;
+}
+.hero-meta {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  color: var(--text-faint);
+  letter-spacing: 0.03em;
+}
+.hero-meta span { display: flex; align-items: center; gap: 0.35rem; }
+.hero-meta .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent); }
 
-        /* Avatar */
-        .avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.15);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.8rem;
-            font-weight: 800;
-            margin: 0 auto 1.5rem;
-            border: 3px solid rgba(255,255,255,0.3);
-            letter-spacing: 2px;
-        }
+/* ── Sections ───────────────────────── */
+.section {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1.5rem 5rem;
+}
 
-        /* Print */
-        @media print {
-            .hero { min-height: auto; padding: 2rem; }
-            nav { display: none; }
-            .card:hover, .strength-card:hover { transform: none; }
-        }
-        @media (max-width: 600px) {
-            .section { padding: 2.5rem 1rem; }
-            .card { padding: 1rem 1.2rem; }
-            .strength-card { padding: 1rem 1.2rem; }
-            nav a { padding: 0.6rem 0.8rem; font-size: 0.8rem; }
-            .hero h1 { letter-spacing: 3px; }
-        }
-    </style>
+/* ── Bio ────────────────────────────── */
+.bio-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+.bio-text p {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+.bio-text strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.bio-highlight {
+  background: var(--accent-subtle);
+  border: 1px solid var(--accent-border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  align-self: start;
+}
+.bio-highlight dt {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  margin-top: 1rem;
+}
+.bio-highlight dt:first-child { margin-top: 0; }
+.bio-highlight dd {
+  font-size: 0.95rem;
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ── Timeline ───────────────────────── */
+.timeline { position: relative; padding-left: 2rem; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0.5rem; bottom: 0.5rem;
+  width: 1px;
+  background: var(--border);
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 2.5rem;
+  padding-left: 1.5rem;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -2rem; top: 0.5rem;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+.timeline-period {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+.timeline-role {
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 0.15rem;
+}
+.timeline-org {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+.timeline-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ── Strengths ──────────────────────── */
+.strength-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+.strength-card {
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  transition: border-color 0.2s, transform 0.2s;
+}
+.strength-card:hover {
+  border-color: var(--accent-border);
+  transform: translateY(-2px);
+}
+.strength-card .strength-icon {
+  font-size: 1.4rem;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+.strength-card h3 { margin-bottom: 0.5rem; }
+.strength-card p { font-size: 0.9rem; line-height: 1.6; }
+
+/* ── Skills ─────────────────────────── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+.skill-group-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+.skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.skill-tag {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  background: var(--surface);
+}
+.skill-tag.active {
+  border-color: var(--accent-border);
+  color: var(--accent);
+  background: var(--accent-subtle);
+}
+
+/* ── Contact ────────────────────────── */
+.contact-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.contact-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  background: var(--surface);
+  transition: border-color 0.2s;
+}
+.contact-chip:hover { border-color: var(--accent-border); }
+
+/* ── Footer ─────────────────────────── */
+footer {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-faint);
+}
+
+/* ── Responsive ─────────────────────── */
+@media (max-width: 700px) {
+  .bio-grid { grid-template-columns: 1fr; }
+  .header-nav { gap: 1rem; }
+  .header-nav a { font-size: 0.78rem; }
+  .timeline { padding-left: 1.5rem; }
+  .timeline-item { padding-left: 1.2rem; }
+  .timeline-item::before { left: -1.5rem; }
+  .strength-grid { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 <body>
 
-<!-- ===== Hero ===== -->
-<section class="hero" id="home">
-    <div class="hero-bg-shapes">
-        <span></span><span></span><span></span>
-    </div>
-    <div class="hero-content">
-        <div class="avatar">ZS</div>
-        <h1>郑书豪</h1>
-        <p class="subtitle">AI 应用探索者 · 游戏设计师 · 公众号运营者</p>
-        <p class="tagline">土木工程背景 · 全栈 AI 自驱探索者 · 5 年独立内容运营</p>
-        <div class="hero-contact">
-            <span>📞 19983779811</span>
-            <a href="mailto:2302813648@qq.com">📧 2302813648@qq.com</a>
-            <span>📍 成都</span>
-        </div>
-    </div>
-    <div class="scroll-down" onclick="document.getElementById('about').scrollIntoView()">↓</div>
-</section>
-
-<!-- ===== Navigation ===== -->
-<nav>
-    <ul>
-        <li><a href="#about">自我介绍</a></li>
-        <li><a href="#experience">经历</a></li>
-        <li><a href="#strengths">个人优势</a></li>
-        <li><a href="#skills">技能</a></li>
-        <li><a href="#contact">联系</a></li>
+<!-- ═══ Header ═══ -->
+<header id="header">
+  <div class="header-inner">
+    <span class="header-name">郑书豪</span>
+    <ul class="header-nav">
+      <li><a href="#about">关于</a></li>
+      <li><a href="#journey">经历</a></li>
+      <li><a href="#strengths">优势</a></li>
+      <li><a href="#skills">技能</a></li>
     </ul>
-</nav>
+  </div>
+</header>
 
-<!-- ===== 自我介绍 ===== -->
+<!-- ═══ Hero ═══ -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow">AI / Content / Build</p>
+    <h1>郑书豪</h1>
+    <p class="subtitle">用 AI 把想法变成产品。游戏设计、内容运营、自动化——在交叉点上做事。</p>
+    <div class="hero-meta">
+      <span><span class="dot"></span>成都</span>
+      <span><span class="dot"></span>23 岁</span>
+      <span><span class="dot"></span>雅思 6.5</span>
+      <span><span class="dot"></span>5 年内容运营</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ About ═══ -->
 <section class="section" id="about">
-    <h2 class="section-title">自我介绍</h2>
-    <div class="card">
-        <div class="about-text">
-            <p>你好，我是郑书豪，23 岁，现居成都。</p>
-            <p>
-                我是 <strong>AI 应用的熟练使用者</strong>——熟练运用 Claude Code、CodeBuddy、Cursor 等 AI 编程工具辅助工作流，
-                具备本地大模型部署与 AI Agent 应用能力；同时也是 <strong>5 年公众号独立运营者</strong>，
-                从内容策划到用户互动全链路独立完成，最高 500+ 关注，单篇阅读量 2000+。
-            </p>
-            <p>
-                在校期间，我以电竞社社长身份组织多次校园大型赛事（英雄联盟联赛、CSGO 竞技赛、无畏契约联赛），
-                并创新策划「一周情侣」校园活动。作为音乐协会主席，举办草坪音乐会、多次路演，担任主唱与吉他手。
-                我同时拥有土木工程专业背景与实践经历，曾在检测公司和工程局实习。
-            </p>
-            <p>
-                我相信 <strong>跨界融合</strong> 的力量——工程背景培养了我的逻辑与严谨，AI 技术赋予我工具与效率，
-                内容运营锻炼了我的表达与审美，音乐与艺术则让我保持创造力。我始终在探索：如何用技术创造真实价值。
-            </p>
-        </div>
+  <h2>关于我</h2>
+  <div class="bio-grid">
+    <div class="bio-text">
+      <p>土木工程出身，但真正投入的是<strong>用 AI 工具创造东西</strong>。</p>
+      <p>熟练运用 Claude Code、Cursor、CodeBuddy 等 AI 编程工具。独立运营公众号 5 年，从内容策划到用户互动全链路操盘，最高 500+ 关注，单篇 2000+ 阅读。在校期间独立创办咖啡店，从选址到运营全流程实践。</p>
+      <p>做过电竞社社长、音协主席——擅长从零搭建团队，统筹线上线下活动。相信 <strong>跨界融合是最强的竞争力</strong>。</p>
     </div>
+    <dl class="bio-highlight">
+      <dt>位置</dt><dd>成都</dd>
+      <dt>语言</dt><dd>中文 · 英语（雅思 6.5）</dd>
+      <dt>专注</dt><dd>AI 应用 · 自动化 · 内容运营</dd>
+      <dt>联系</dt><dd>2302813648@qq.com</dd>
+    </dl>
+  </div>
 </section>
 
-<!-- ===== 经历 ===== -->
-<section class="section" id="experience">
-    <h2 class="section-title">经历</h2>
-
-    <!-- 工作经历 -->
-    <div class="card">
-        <div class="card-header">
-            <span class="card-title">四川华测建信检测技术公司</span>
-            <span class="card-meta">2024.07 – 2024.09</span>
-        </div>
-        <div class="card-subtitle">助理检测师</div>
-        <ul>
-            <li>样品辅助检测及外出商务洽谈</li>
-            <li>编写公司检测报告</li>
-            <li>维护公司公众号日常运营及内容编排</li>
-        </ul>
+<!-- ═══ Journey ═══ -->
+<section class="section" id="journey">
+  <h2>经历</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <p class="timeline-period">2024.07 – 2024.09</p>
+      <p class="timeline-role">助理检测师</p>
+      <p class="timeline-org">四川华测建信检测技术公司</p>
+      <p class="timeline-desc">对外商务洽谈，运营公司公众号，编写标准化报告文档。</p>
     </div>
-
-    <div class="card">
-        <div class="card-header">
-            <span class="card-title">中国水利水电第十工程局有限公司</span>
-            <span class="card-meta">2020.12 – 2021.03</span>
-        </div>
-        <div class="card-subtitle">资料员 · 工程项目部</div>
-        <ul>
-            <li>负责公路工程桥梁隧道专业内业资料编辑</li>
-            <li>参与现场施工实践，熟悉工程现场流程</li>
-        </ul>
+    <div class="timeline-item">
+      <p class="timeline-period">2024</p>
+      <p class="timeline-role">独立创业者</p>
+      <p class="timeline-org">校园咖啡店</p>
+      <p class="timeline-desc">独立完成选址、装修、定价、运营，日均 30+ 客户，积累面对面对话与需求挖掘经验。</p>
     </div>
-
-    <!-- 社团经历 -->
-    <div class="card">
-        <div class="card-header">
-            <span class="card-title">ATG 电子竞技俱乐部</span>
-            <span class="card-meta">2020.09 – 2023.06</span>
-        </div>
-        <div class="card-subtitle">会长</div>
-        <ul>
-            <li>创办协会公众号并独立运营，最高 500+ 关注，单篇阅读量突破 2000+</li>
-            <li>举办英雄联盟线下街道单挑赛，现场观看超 100 人</li>
-            <li>独立负责举办校园第一次英雄联盟联赛，全流程统筹</li>
-            <li>参与举办校园第一次无畏契约联赛</li>
-            <li>独立负责校园第一次 CSGO 竞技赛</li>
-            <li>参加英雄联盟高校比赛，获西南赛区 16 强</li>
-            <li>独立策划「一周情侣」活动，帮助 30+ 对大学生建立联系</li>
-        </ul>
+    <div class="timeline-item">
+      <p class="timeline-period">2020.09 – 2023.06</p>
+      <p class="timeline-role">会长</p>
+      <p class="timeline-org">ATG 电子竞技俱乐部</p>
+      <p class="timeline-desc">从零搭建 30+ 人社团。独立运营公众号 3 年，活动转化率 65%。统筹 10+ 场百人赛事，获最佳社团奖、最佳社长奖。</p>
     </div>
-
-    <div class="card">
-        <div class="card-header">
-            <span class="card-title">昨日音协</span>
-            <span class="card-meta">2021.09 – 2023.06</span>
-        </div>
-        <div class="card-subtitle">主席</div>
-        <ul>
-            <li>举办五次音乐路演，担任主唱、鼓手及吉他手</li>
-            <li>举办校园第一次草坪音乐会，现场观看超 200 人</li>
-            <li>与校艺术团合作举办校园歌手大赛，担任评委</li>
-        </ul>
+    <div class="timeline-item">
+      <p class="timeline-period">2021.09 – 2023.06</p>
+      <p class="timeline-role">主席</p>
+      <p class="timeline-org">昨日音协</p>
+      <p class="timeline-desc">策划 5 场路演，统筹草坪音乐会（200+ 观众），担任主唱、鼓手、吉他手。</p>
     </div>
-
-    <div class="card">
-        <div class="card-header">
-            <span class="card-title">校学习部</span>
-            <span class="card-meta">2020.09 – 2022.05</span>
-        </div>
-        <div class="card-subtitle">副部长</div>
-        <ul>
-            <li>跨部门沟通协调，整合资源，管理早自习出勤</li>
-            <li>负责四六级考试成绩证书管理发放</li>
-            <li>协助各类学术讲座举办</li>
-        </ul>
+    <div class="timeline-item">
+      <p class="timeline-period">2020.12 – 2021.03</p>
+      <p class="timeline-role">资料员</p>
+      <p class="timeline-org">中国水利水电第十工程局</p>
+      <p class="timeline-desc">公路桥梁隧道内业资料编辑，参与现场施工实践。</p>
     </div>
+  </div>
 </section>
 
-<!-- ===== 个人优势 ===== -->
+<!-- ═══ Strengths ═══ -->
 <section class="section" id="strengths">
-    <h2 class="section-title">个人优势</h2>
-    <div class="strength-grid">
-        <div class="strength-card">
-            <h3>🤖 AI Agent 熟练应用</h3>
-            <p>熟练运用 Claude Code、CodeBuddy、Cursor 等 AI 编程工具辅助工作流。掌握本地大模型（Ollama / LM Studio）部署与使用，能自主搭建 AI 应用环境，熟练应用 OpenClaw 自动化工具集，具备从需求拆解到落地执行的全流程能力。</p>
-        </div>
-
-        <div class="strength-card">
-            <h3>📱 公众号独立运营（5 年）</h3>
-            <p>独自运营公众号 5 年，从内容策划、排版编辑到用户互动全链路独立完成。最高关注 500+，单篇阅读量突破 2000+。擅长通过邮件与公众号双渠道进行用户运营与活动互动，具备完整的内容矩阵搭建与数据分析能力。</p>
-        </div>
-
-        <div class="strength-card">
-            <h3>🏆 组织策划与领导力</h3>
-            <p>作为电竞社社长，从零到一搭建社团体系，涵盖活动策划、竞赛组织、校际合作。独立策划英雄联盟联赛、CSGO 竞技赛、校园一周情侣等多种类型活动，覆盖线上线下全流程。带领社团获得「2022 最佳社团奖」，个人获评「2021 最佳社长奖」。</p>
-        </div>
-
-        <div class="strength-card">
-            <h3>🚀 快速学习与跨界适应</h3>
-            <p>土木工程专业背景 + AI 技术自驱探索 + 艺术与音乐实践，善于快速进入新领域并产出实际成果。从工程检测到 AI Agent 应用，从电竞组织到音乐演出，从公众号运营到本地大模型部署——持续在多个领域实现从零到一的突破。</p>
-        </div>
-
-        <div class="strength-card">
-            <h3>☕ 创业与实践</h3>
-            <p>在校期间成功创办小型咖啡店并实现日常销售目标，具备独立创业所需的选址、运营、财务核算等综合能力。始终以「做成事」为导向，将想法落地为实际产出。</p>
-        </div>
+  <h2>个人优势</h2>
+  <div class="strength-grid">
+    <div class="strength-card">
+      <span class="strength-icon">&#x2699;</span>
+      <h3>AI 应用 &amp; 自动化</h3>
+      <p>熟练运用 Claude Code、Cursor、CodeBuddy 等 AI 工具。掌握本地大模型部署，能自主搭建 AI 工作流与自动化系统。</p>
     </div>
+    <div class="strength-card">
+      <span class="strength-icon">&#x270D;</span>
+      <h3>5 年内容运营</h3>
+      <p>独立运营公众号，最高 500+ 关注，单篇 2000+ 阅读。完整的内容矩阵搭建与用户互动经验。公众号转化率 65%。</p>
+    </div>
+    <div class="strength-card">
+      <span class="strength-icon">&#x2691;</span>
+      <h3>组织与领导力</h3>
+      <p>从零搭建 3 个团队，独立统筹 10+ 场百人活动。获最佳社团奖、最佳社长奖。擅长资源协调与跨部门沟通。</p>
+    </div>
+    <div class="strength-card">
+      <span class="strength-icon">&#x2601;</span>
+      <h3>跨界学习能力</h3>
+      <p>土木工程 &rarr; AI 应用 &rarr; 内容运营 &rarr; 创业实践。持续在陌生领域从零到一，用工程思维拆解所有问题。</p>
+    </div>
+  </div>
 </section>
 
-<!-- ===== 技能 ===== -->
+<!-- ═══ Skills ═══ -->
 <section class="section" id="skills">
-    <h2 class="section-title">技能</h2>
-    <div class="card">
-        <div class="skill-group">
-            <div class="skill-group-label">AI & 开发</div>
-            <div class="skills-wrap">
-                <span class="skill-tag">Claude Code</span>
-                <span class="skill-tag">CodeBuddy</span>
-                <span class="skill-tag">Cursor</span>
-                <span class="skill-tag">AI Agent 应用</span>
-                <span class="skill-tag">本地大模型部署</span>
-                <span class="skill-tag">Ollama / LM Studio</span>
-                <span class="skill-tag">OpenClaw 自动化</span>
-                <span class="skill-tag">提示词工程</span>
-                <span class="skill-tag">Python / JavaScript</span>
-            </div>
-        </div>
-        <div class="skill-group">
-            <div class="skill-group-label">工程软件</div>
-            <div class="skills-wrap">
-                <span class="skill-tag outline">CAD</span>
-                <span class="skill-tag outline">BIM</span>
-                <span class="skill-tag outline">建筑结构设计</span>
-            </div>
-        </div>
-        <div class="skill-group">
-            <div class="skill-group-label">设计与媒体</div>
-            <div class="skills-wrap">
-                <span class="skill-tag outline">Photoshop</span>
-                <span class="skill-tag outline">Premiere</span>
-                <span class="skill-tag outline">公众号排版</span>
-                <span class="skill-tag outline">吉他演奏</span>
-                <span class="skill-tag outline">篮球二级裁判</span>
-            </div>
-        </div>
-        <div class="skill-group">
-            <div class="skill-group-label">语言</div>
-            <div class="skills-wrap">
-                <span class="skill-tag outline">雅思 6.5</span>
-                <span class="skill-tag outline">英语四级</span>
-                <span class="skill-tag outline">普通话</span>
-            </div>
-        </div>
+  <h2>技能</h2>
+  <div class="skills-grid">
+    <div>
+      <p class="skill-group-label">AI &amp; 开发</p>
+      <div class="skill-tags">
+        <span class="skill-tag active">Claude Code</span>
+        <span class="skill-tag active">Cursor</span>
+        <span class="skill-tag active">CodeBuddy</span>
+        <span class="skill-tag active">AI Agent</span>
+        <span class="skill-tag">Ollama</span>
+        <span class="skill-tag">LM Studio</span>
+        <span class="skill-tag">OpenClaw</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">JavaScript</span>
+      </div>
     </div>
+    <div>
+      <p class="skill-group-label">内容 &amp; 媒体</p>
+      <div class="skill-tags">
+        <span class="skill-tag active">公众号运营</span>
+        <span class="skill-tag active">内容策划</span>
+        <span class="skill-tag">Photoshop</span>
+        <span class="skill-tag">Premiere</span>
+      </div>
+    </div>
+    <div>
+      <p class="skill-group-label">工程</p>
+      <div class="skill-tags">
+        <span class="skill-tag">CAD</span>
+        <span class="skill-tag">BIM</span>
+      </div>
+    </div>
+    <div>
+      <p class="skill-group-label">证书</p>
+      <div class="skill-tags">
+        <span class="skill-tag active">雅思 6.5</span>
+        <span class="skill-tag">C1 驾照</span>
+        <span class="skill-tag">计算机二级</span>
+        <span class="skill-tag">篮球二级裁判</span>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- ===== 联系 ===== -->
-<section class="section" id="contact" style="padding-bottom: 3rem;">
-    <h2 class="section-title">联系我</h2>
-    <div class="card" style="text-align: center;">
-        <p style="font-size: 1.1rem; margin-bottom: 1rem;">欢迎交流合作 🤝</p>
-        <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; font-size: 0.95rem;">
-            <span>📞 19983779811</span>
-            <a href="mailto:2302813648@qq.com" style="color: var(--accent); text-decoration: none;">📧 2302813648@qq.com</a>
-            <span>📍 成都</span>
-        </div>
-    </div>
+<!-- ═══ Contact ═══ -->
+<section class="section" id="contact" style="padding-bottom: 2rem;">
+  <h2>联系</h2>
+  <div class="contact-row">
+    <a href="mailto:2302813648@qq.com" class="contact-chip">&#x2709; 2302813648@qq.com</a>
+    <span class="contact-chip">&#x260E; 19983779811</span>
+    <a href="https://ddlandyelv.github.io" class="contact-chip">&#x2197; ddlandyelv.github.io</a>
+  </div>
 </section>
 
 <footer>
-    <p>© 2026 郑书豪 · 用技术创造价值</p>
+  <span>&copy; 2026 郑书豪</span>
+  <span>用技术创造价值</span>
 </footer>
 
 <script>
-    // 导航高亮
-    const sections = document.querySelectorAll('.section, .hero');
-    const navLinks = document.querySelectorAll('nav a');
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.id || 'home';
-                navLinks.forEach(a => {
-                    a.style.color = a.getAttribute('href') === '#' + id ? '#6c5ce7' : '#636e72';
-                });
-            }
-        });
-    }, { rootMargin: '-40% 0px -55% 0px' });
-    sections.forEach(s => observer.observe(s));
+// Header scroll effect
+window.addEventListener('scroll', function() {
+  document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
+});
 </script>
 
 </body>
