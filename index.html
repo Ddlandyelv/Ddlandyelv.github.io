@@ -327,104 +327,6 @@ footer {
   .timeline-item::before { left: -1.5rem; }
   .strength-grid { grid-template-columns: 1fr; }
 }
-
-/* ---- Projects ---- */
-.project-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 2rem;
-  margin-bottom: 1.5rem;
-  transition: border-color 0.2s;
-}
-.project-card:hover { border-color: var(--accent); }
-.project-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.75rem;
-}
-.project-header h3 { font-size: 1.2rem; }
-.project-tag {
-  font-size: 0.75rem;
-  padding: 0.25rem 0.75rem;
-  background: var(--accent-subtle);
-  border: 1px solid var(--accent-border);
-  border-radius: 100px;
-  color: var(--accent);
-  font-weight: 500;
-}
-.project-desc {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  margin-bottom: 1rem;
-  line-height: 1.7;
-}
-.project-details {
-  display: grid;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-}
-.detail-item {
-  display: flex;
-  gap: 0.75rem;
-  font-size: 0.9rem;
-}
-.detail-item strong {
-  color: var(--text);
-  font-weight: 600;
-  min-width: 80px;
-  flex-shrink: 0;
-}
-.detail-item span { color: var(--text-muted); }
-.project-result {
-  background: var(--accent-subtle);
-  border-left: 3px solid var(--accent);
-  padding: 0.75rem 1rem;
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
-}
-.result-label {
-  font-weight: 700;
-  color: var(--accent);
-  margin-right: 0.5rem;
-}
-.project-tech {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-.project-tech span {
-  font-size: 0.75rem;
-  padding: 0.2rem 0.6rem;
-  background: var(--border);
-  border-radius: 4px;
-  color: var(--text-muted);
-  font-family: var(--font-mono);
-}
-
-/* ---- Skills ---- */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-}
-.skill-category h3 {
-  font-size: 0.95rem;
-  margin-bottom: 0.75rem;
-  color: var(--accent);
-}
-.skill-category ul {
-  list-style: none;
-}
-.skill-category li {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  padding: 0.3rem 0;
-  border-bottom: 1px solid var(--border);
-}
-.skill-category li:last-child { border-bottom: none; }
 </style>
 </head>
 <body>
@@ -462,14 +364,14 @@ footer {
   <h2>关于我</h2>
   <div class="bio-grid">
     <div class="bio-text">
-      <p>土木工程出身，但真正投入的是<strong>用 AI 解决真实问题</strong>。</p>
+      <p>土木工程出身，但真正投入的是<strong>用产品思维解决真实问题</strong>。</p>
       <p>熟练运用 Claude Code、Cursor、CodeBuddy 等 AI 编程工具。独立运营公众号 5 年，从内容策划到用户互动全链路操盘，最高 500+ 关注，单篇 2000+ 阅读。在校期间独立创办咖啡店，从选址到运营全流程实践。</p>
       <p>做过电竞社社长、音协主席——擅长从零搭建团队，统筹线上线下活动。相信 <strong>跨界融合是最强的竞争力</strong>。</p>
     </div>
     <dl class="bio-highlight">
       <dt>位置</dt><dd>成都</dd>
       <dt>语言</dt><dd>中文 · 英语（雅思 6.5）</dd>
-      <dt>专注</dt><dd>AI 产品设计 · 需求分析 · Prompt 工程</dd>
+      <dt>专注</dt><dd>产品设计 · 需求分析 · 项目交付</dd>
       <dt>联系</dt><dd>2302813648@qq.com</dd>
     </dl>
   </div>
@@ -607,125 +509,5 @@ window.addEventListener('scroll', function() {
 });
 </script>
 
-
-  <!-- ===== 项目详情 ===== -->
-  <section class="section" id="projects">
-    <h2>Projects</h2>
-    
-    <div class="project-card">
-      <div class="project-header">
-        <h3>AI 创作工作台</h3>
-        <span class="project-tag">AI 产品设计 / 独立交付</span>
-      </div>
-      <p class="project-desc">为内容创作者设计的一站式 AI 工作流系统，覆盖素材管理、内容创作、知识沉淀、数据复盘。独立完成从需求调研到产品上线的全流程。</p>
-      <div class="project-details">
-        <div class="detail-item">
-          <strong>需求调研</strong>
-          <span>通过用户访谈和行为分析，识别核心痛点，设计交互式需求诊断问卷</span>
-        </div>
-        <div class="detail-item">
-          <strong>产品设计</strong>
-          <span>9 大功能模块架构：AI 文案生成、知识星图、沉浸阅读+批注台、数据看板、Wiki 层、对标账号、灵感库、每日热点</span>
-        </div>
-        <div class="detail-item">
-          <strong>AI 选型</strong>
-          <span>评估 DeepSeek / 智谱 GLM-4V-Flash 能力边界，设计 Prompt 工程策略</span>
-        </div>
-        <div class="detail-item">
-          <strong>RAG 架构</strong>
-          <span>实现书籍/笔记/Wiki 的语义检索，让 AI 基于用户真实知识库回答问题</span>
-        </div>
-        <div class="detail-item">
-          <strong>安全架构</strong>
-          <span>JWT 认证 + Rate Limiting + SQL 参数化查询 + 数据加密存储</span>
-        </div>
-      </div>
-      <div class="project-result">
-        <span class="result-label">成果</span>
-        三个月内粉丝从 500 增长到 5.2w；创作者日常工作从 3-4 小时压缩到 30 分钟；核心模块日均使用
-      </div>
-      <div class="project-tech">
-        <span>HTML/CSS/JS</span><span>D3.js</span><span>PDF.js</span><span>Node.js</span><span>Express</span><span>SQLite</span><span>Chrome Extension</span><span>DeepSeek API</span><span>智谱 GLM-4V-Flash</span>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-header">
-        <h3>美术教培 AI 提效方案</h3>
-        <span class="project-tag">AI 产品设计 / 课程架构师</span>
-      </div>
-      <p class="project-desc">针对美术培训画室设计 AI 驱动的教案创作与知识管理系统，将 AI 能力融入教学全流程，帮助画室降本增效、提升管理水平。</p>
-      <div class="project-details">
-        <div class="detail-item">
-          <strong>行业调研</strong>
-          <span>调研教培行业教学流程，识别 4 个 AI 可切入场景，完成可行性分析</span>
-        </div>
-        <div class="detail-item">
-          <strong>产品设计</strong>
-          <span>AI 教案生成系统 + 4 级标准化课程体系 + 飞书知识库架构</span>
-        </div>
-        <div class="detail-item">
-          <strong>风格学习</strong>
-          <span>从历史教案提取老师教学风格 Profile，注入 Prompt 实现个性化教案生成</span>
-        </div>
-        <div class="detail-item">
-          <strong>Prompt 工程</strong>
-          <span>按年级和风格定制 Prompt 模板体系，评估 AI 在教培场景的能力边界</span>
-        </div>
-      </div>
-      <div class="project-result">
-        <span class="result-label">成果</span>
-        单篇教案生产成本降低超 80%（2 小时→20 分钟）；建立 4 级标准化课程体系；新教师培训周期缩短 60%
-      </div>
-      <div class="project-tech">
-        <span>DeepSeek API</span><span>Prompt Engineering</span><span>飞书知识库</span><span>飞书多维表格</span><span>RAG</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== 技能 ===== -->
-  <section class="section" id="skills">
-    <h2>Skills</h2>
-    <div class="skills-grid">
-      <div class="skill-category">
-        <h3>AI 产品</h3>
-        <ul>
-          <li>需求分析 & 用户调研</li>
-          <li>产品设计 & PRD 撰写</li>
-          <li>AI 能力评估 & 选型</li>
-          <li>Prompt 工程</li>
-          <li>RAG 架构设计</li>
-        </ul>
-      </div>
-      <div class="skill-category">
-        <h3>技术理解</h3>
-        <ul>
-          <li>前后端架构 / REST API</li>
-          <li>SQLite / 数据库设计</li>
-          <li>Chrome Extension</li>
-          <li>D3.js / 数据可视化</li>
-          <li>JWT 认证 / 安全防护</li>
-        </ul>
-      </div>
-      <div class="skill-category">
-        <h3>AI 工具</h3>
-        <ul>
-          <li>Claude Code / Cursor</li>
-          <li>DeepSeek / 智谱 GLM</li>
-          <li>本地大模型部署</li>
-          <li>自动化工作流</li>
-        </ul>
-      </div>
-      <div class="skill-category">
-        <h3>其他</h3>
-        <ul>
-          <li>公众号运营 & 内容策划</li>
-          <li>数据分析 & 用户增长</li>
-          <li>英语（雅思 6.5）</li>
-          <li>项目管理 & 跨职能协调</li>
-        </ul>
-      </div>
-    </div>
-  </section>
 </body>
 </html>
